@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse coding project ideas for beginners, builders, and self-taught developers through Syntax Studio.">
+
+    <title>Project Ideas | Syntax Studio Resource Library</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="projects-data.js" defer></script>
+    <script src="projects.js" defer></script>
+</head>
+
+<body>
+    <div class="page-glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+        <div class="header-bar">
+            <img src="images/syntax-studio-transparent.png" alt="syntax studio logo" class="logo">
+            <p class="logo-text">SYNTAX STUDIO</p>
+
+            <nav class="site-nav" aria-label="Main navigation">
+                <a class="index" href="index.html">HOME</a>
+                <a class="resource" href="resources.html">RESOURCES</a>
+                <a class="projects" href="projects.html" aria-current="page">PROJECT IDEAS</a>
+                <a class="community" href="community.html">COMMUNITY</a>
+                <a class="submit" href="submit.html">SUBMIT RESOURCES</a>
+            </nav>
+        </div>
+
+        <div class="projects-hero">
+            <div class="projects-hero-text">
+                <p class="greeting">PROJECT IDEAS</p>
+                <h1 class="title">Find your next build.</h1>
+                <p class="subheading">Browse project ideas by difficulty, tech stack, project type, and time estimate. Use these prompts to practice skills, build confidence, and create portfolio-ready work.</p>
+
+                <div class="link1-parent">
+                    <a href="#project-library" class="resource-link">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        Browse Ideas
+                    </a>
+                    <a href="submit.html" class="discord-link">
+                        <i class="fa-regular fa-file-lines"></i>
+                        Submit Idea
+                    </a>
+                </div>
+            </div>
+
+            <div class="projects-hero-card">
+                <div class="icon-wrapper project-hero-icon">
+                    <i class="fa-solid fa-folder-open card-icon"></i>
+                </div>
+
+                <div class="card-divider">
+                    <hr>
+                    <i class="fa-solid fa-heart divider-heart"></i>
+                    <hr>
+                </div>
+
+                <p>Use this page when you know what you want to practice, but need a real project idea to turn that practice into something buildable.</p>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="project-paths-section" aria-labelledby="project-paths-title">
+            <p class="greeting">CHOOSE A PATH</p>
+            <h2 id="project-paths-title">Start with the kind of project you need.</h2>
+            <p class="project-section-intro">These paths help learners choose ideas based on where they are and what they want to practice.</p>
+
+            <div class="project-path-grid">
+                <article class="project-path-card">
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-seedling card-icon"></i>
+                    </div>
+                    <h3>Beginner Builds</h3>
+                    <p>Small projects for practicing structure, styling, functions, arrays, objects, and basic DOM work.</p>
+                </article>
+
+                <article class="project-path-card">
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-laptop-code card-icon"></i>
+                    </div>
+                    <h3>JavaScript Practice</h3>
+                    <p>Interactive projects focused on events, conditionals, loops, DOM updates, and user input.</p>
+                </article>
+
+                <article class="project-path-card">
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-briefcase card-icon"></i>
+                    </div>
+                    <h3>Portfolio Projects</h3>
+                    <p>Polished builds that can become case studies, featured projects, or portfolio sections.</p>
+                </article>
+
+                <article class="project-path-card">
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-rocket card-icon"></i>
+                    </div>
+                    <h3>Stretch Builds</h3>
+                    <p>Ideas with extra challenges for learners who want to push beyond the base version.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="project-controls-section" id="project-library" aria-labelledby="project-library-title">
+            <div class="project-controls-heading">
+                <div>
+                    <p class="greeting">PROJECT LIBRARY</p>
+                    <h2 id="project-library-title">Browse Project Ideas</h2>
+                    <p>Search by title, description, difficulty, tech, project type, time estimate, skills, or stretch goals.</p>
+                </div>
+
+                <a href="submit.html" class="project-submit-link">
+                    Submit Idea
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="project-search-panel">
+                <label for="project-search">Search project ideas</label>
+
+                <div class="project-search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="search" id="project-search" placeholder="Search DOM, forms, portfolio, react, api, python...">
+                </div>
+
+                <div class="project-filter-grid">
+                    <div class="project-filter-group">
+                        <label for="difficulty-filter">Difficulty</label>
+                        <select id="difficulty-filter">
+                            <option value="all">All Difficulties</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+
+                    <div class="project-filter-group">
+                        <label for="tech-filter">Tech</label>
+                        <select id="tech-filter">
+                            <option value="all">All Tech</option>
+                            <option value="html-css">HTML & CSS</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="react">React</option>
+                            <option value="python">Python</option>
+                            <option value="api">API</option>
+                            <option value="backend">Backend</option>
+                            <option value="databases">Databases</option>
+                        </select>
+                    </div>
+
+                    <div class="project-filter-group">
+                        <label for="type-filter">Type</label>
+                        <select id="type-filter">
+                            <option value="all">All Types</option>
+                            <option value="layout-practice">Layout Practice</option>
+                            <option value="dom-practice">DOM Practice</option>
+                            <option value="form-project">Form Project</option>
+                            <option value="mini-app">Mini App</option>
+                            <option value="api-project">API Project</option>
+                            <option value="portfolio-project">Portfolio Project</option>
+                            <option value="game">Game</option>
+                            <option value="community-challenge">Community Challenge</option>
+                        </select>
+                    </div>
+
+                    <div class="project-filter-group">
+                        <label for="time-filter">Time</label>
+                        <select id="time-filter">
+                            <option value="all">All Time Estimates</option>
+                            <option value="quick-build">Quick Build</option>
+                            <option value="weekend">Weekend</option>
+                            <option value="multi-day">Multi-Day</option>
+                            <option value="larger-project">Larger Project</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="project-filter-actions">
+                    <p id="project-count">Showing 0 project ideas</p>
+
+                    <button type="button" id="clear-project-filters">
+                        Clear Filters
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-results-section" aria-label="Project idea results">
+            <div class="project-results-layout">
+                <aside class="project-guide" aria-label="Project guide">
+                    <div class="project-guide-card">
+                        <h2>How to Choose</h2>
+                        <ul class="project-guide-list">
+                            <li>choose beginner if you are practicing basics</li>
+                            <li>choose DOM practice for interactivity</li>
+                            <li>choose portfolio when you want polish</li>
+                            <li>save stretch goals until the base version works</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-guide-card">
+                        <h2>Good Project Flow</h2>
+                        <ul class="project-guide-list">
+                            <li>build the smallest version first</li>
+                            <li>test each feature as you add it</li>
+                            <li>write down bugs as you find them</li>
+                            <li>add stretch goals last</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-guide-card">
+                        <h2>Common Skills</h2>
+
+                        <div class="project-tags">
+                            <span>forms</span>
+                            <span>arrays</span>
+                            <span>objects</span>
+                            <span>DOM</span>
+                            <span>events</span>
+                            <span>localStorage</span>
+                            <span>fetch</span>
+                            <span>responsive design</span>
+                        </div>
+                    </div>
+                </aside>
+
+                <section class="project-results-main">
+                    <div class="project-card-grid" id="project-grid"></div>
+
+                    <div class="project-empty-state" id="project-empty-state">
+                        <i class="fa-solid fa-folder-open"></i>
+                        <h3>No project ideas found</h3>
+                        <p>Try changing your search or clearing the filters.</p>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section class="projects-callout" aria-labelledby="projects-callout-title">
+            <div class="callout-icon">
+                <i class="fa-regular fa-lightbulb"></i>
+            </div>
+
+            <div class="callout-text">
+                <h3 id="projects-callout-title">Have a project idea to share?</h3>
+                <p>Submit an idea so other learners can practice, build, and grow with it.</p>
+            </div>
+
+            <a href="submit.html" class="callout-btn">
+                Submit an Idea
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="images/syntax-studio-logo-inv.png" alt="syntax studio logo" class="footer-logo">
+                <p class="logo-text2">SYNTAX STUDIO</p>
+                <p class="footer-tagline">Community-built coding resources for everyone.</p>
+            </div>
+
+            <div class="footer-nav-group">
+                <h5>Explore</h5>
+                <nav>
+                    <a href="resources.html">Resources</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="community.html">Community</a>
+                </nav>
+            </div>
+
+            <div class="footer-nav-group">
+                <h5>Contribute</h5>
+                <nav>
+                    <a href="submit.html">Submit a Resource</a>
+                    <a href="https://discord.gg/zPbatCMyJx">Join Discord</a>
+                </nav>
+            </div>
+
+            <div class="footer-nav-group">
+                <h5>Legal</h5>
+                <nav>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </nav>
+            </div>
+
+            <div class="footer-social">
+                <a href="https://discord.gg/zPbatCMyJx" aria-label="Join Syntax Studio on Discord">
+                    <i class="fa-brands fa-discord"></i>
+                </a>
+                <a href="https://github.com/kaymade" aria-label="Visit Syntax Studio on GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://x.com/syntaxstudio_?s=21" aria-label="Visit Syntax Studio on X">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+            </div>
+        </div>
+
+        <p class="footer-copyright">© 2026 Syntax Studio</p>
+    </footer>
+</body>
+</html>

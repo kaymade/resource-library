@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse coding resources for beginners, builders, and self-taught developers through the Syntax Studio Resource Library.">
+
+    <title>Resources | Syntax Studio Resource Library</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="resources-data.js" defer></script>
+    <script src="resources.js" defer></script>
+</head>
+
+<body>
+    <div class="page-glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+        <div class="header-bar">
+            <img src="images/syntax-studio-transparent.png" alt="syntax studio logo" class="logo">
+            <p class="logo-text">SYNTAX STUDIO</p>
+
+            <nav class="site-nav" aria-label="Main navigation">
+                <a class="index" href="index.html">HOME</a>
+                <a class="resource" href="resources.html" aria-current="page">RESOURCES</a>
+                <a class="projects" href="projects.html">PROJECT IDEAS</a>
+                <a class="community" href="community.html">COMMUNITY</a>
+                <a class="submit" href="submit.html">SUBMIT RESOURCES</a>
+            </nav>
+        </div>
+
+        <div class="resources-hero">
+            <div class="resources-hero-text">
+                <p class="greeting">RESOURCE LIBRARY</p>
+                <h1 class="title">Find resources without digging through the entire internet.</h1>
+                <p class="subheading">Search, filter, and browse coding resources for beginners, builders, and self-taught developers. The library is designed to grow across HTML, CSS, JavaScript, Python, React, backend tools, design, accessibility, career resources, and more.</p>
+
+                <div class="link1-parent">
+                    <a href="#resource-library" class="resource-link">
+                        <i class="fa-solid fa-book"></i>
+                        Browse Library
+                    </a>
+                    <a href="submit.html" class="discord-link">
+                        <i class="fa-regular fa-file-lines"></i>
+                        Submit Resource
+                    </a>
+                </div>
+            </div>
+
+            <div class="resources-hero-card">
+                <div class="icon-wrapper resource-hero-icon">
+                    <i class="fa-solid fa-book-open card-icon"></i>
+                </div>
+
+                <div class="card-divider">
+                    <hr>
+                    <i class="fa-solid fa-heart divider-heart"></i>
+                    <hr>
+                </div>
+
+                <p>Use this page for docs, courses, tutorials, videos, tools, articles, references, cheatsheets, and interactive practice resources.</p>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="resource-controls-section" id="resource-library" aria-labelledby="resource-library-title">
+            <div class="resource-controls-heading">
+                <div>
+                    <p class="greeting">MAIN LIBRARY</p>
+                    <h2 id="resource-library-title">Browse Resources</h2>
+                    <p>Search by title, description, category, level, type, or tag.</p>
+                </div>
+
+                <a href="submit.html" class="resource-submit-link">
+                    Submit Resource
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="resource-search-panel">
+                <label for="resource-search">Search resources</label>
+
+                <div class="resource-search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="search" id="resource-search" placeholder="Search python, react, css, docs, accessibility, tools...">
+                </div>
+
+                <div class="resource-filter-grid">
+                    <div class="resource-filter-group">
+                        <label for="category-filter">Category</label>
+                        <select id="category-filter">
+                            <option value="all">All Categories</option>
+                            <option value="html-css">HTML & CSS</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="python">Python</option>
+                            <option value="react">React</option>
+                            <option value="backend">Backend</option>
+                            <option value="databases">Databases</option>
+                            <option value="git-github">Git & GitHub</option>
+                            <option value="design-accessibility">Design & Accessibility</option>
+                            <option value="tools-workflow">Tools & Workflow</option>
+                            <option value="career-portfolio">Career & Portfolio</option>
+                            <option value="computer-science">Computer Science</option>
+                        </select>
+                    </div>
+
+                    <div class="resource-filter-group">
+                        <label for="level-filter">Level</label>
+                        <select id="level-filter">
+                            <option value="all">All Levels</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+
+                    <div class="resource-filter-group">
+                        <label for="type-filter">Type</label>
+                        <select id="type-filter">
+                            <option value="all">All Types</option>
+                            <option value="docs">Docs</option>
+                            <option value="course">Course</option>
+                            <option value="tutorial">Tutorial</option>
+                            <option value="video">Video</option>
+                            <option value="tool">Tool</option>
+                            <option value="article">Article</option>
+                            <option value="reference">Reference</option>
+                            <option value="interactive">Interactive</option>
+                            <option value="cheatsheet">Cheatsheet</option>
+                            <option value="book">Book</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="resource-filter-actions">
+                    <p id="resource-count">Showing 0 resources</p>
+
+                    <button type="button" id="clear-filters">
+                        Clear Filters
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="resource-results-section" aria-label="Resource results">
+            <div class="resource-results-layout">
+                <aside class="resource-guide" aria-label="Resource guide">
+                    <div class="resource-guide-card">
+                        <h2>How to Add Resources</h2>
+                        <p>Add new resources inside <code>resources-data.js</code>. The page creates the cards automatically.</p>
+                    </div>
+
+                    <div class="resource-guide-card">
+                        <h2>Category Values</h2>
+
+                        <div class="resource-tags">
+                            <span>html-css</span>
+                            <span>javascript</span>
+                            <span>python</span>
+                            <span>react</span>
+                            <span>backend</span>
+                            <span>databases</span>
+                            <span>git-github</span>
+                            <span>design-accessibility</span>
+                            <span>tools-workflow</span>
+                            <span>career-portfolio</span>
+                            <span>computer-science</span>
+                        </div>
+                    </div>
+
+                   <div class="resource-guide-card">
+                        <h2>Finding Resources</h2>
+
+                        <ul class="resource-guide-list">
+                            <li>Use search for specific topics</li>
+                            <li>Filter by category, level, or type</li>
+                            <li>Click clear filters to reset the library</li>
+                            <li>Submit useful resources for review</li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <section class="resource-results-main">
+                    <div class="resource-card-grid" id="resource-grid"></div>
+
+                    <div class="resource-empty-state" id="resource-empty-state">
+                        <i class="fa-solid fa-folder-open"></i>
+                        <h3>No resources found</h3>
+                        <p>Try changing your search or clearing the filters.</p>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section class="resources-callout" aria-labelledby="resources-callout-title">
+            <div class="callout-icon">
+                <i class="fa-regular fa-file-lines"></i>
+            </div>
+
+            <div class="callout-text">
+                <h3 id="resources-callout-title">Have something useful to add?</h3>
+                <p>Submit a resource so the library can keep growing with the community.</p>
+            </div>
+
+            <a href="submit.html" class="callout-btn">
+                Submit a Resource
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="images/syntax-studio-logo-inv.png" alt="syntax studio logo" class="footer-logo">
+                <p class="logo-text2">SYNTAX STUDIO</p>
+                <p class="footer-tagline">Community-built coding resources for everyone.</p>
+            </div>
+
+            <div class="footer-nav-group">
+                <h5>Explore</h5>
+                <nav>
+                    <a href="resources.html">Resources</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="community.html">Community</a>
+                </nav>
+            </div>
+
+            <div class="footer-nav-group">
+                <h5>Contribute</h5>
+                <nav>
+                    <a href="submit.html">Submit a Resource</a>
+                    <a href="https://discord.gg/zPbatCMyJx">Join Discord</a>
+                </nav>
+            </div>
+
+            <div class="footer-nav-group">
+                <h5>Legal</h5>
+                <nav>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                </nav>
+            </div>
+
+            <div class="footer-social">
+                <a href="https://discord.gg/zPbatCMyJx" aria-label="Join Syntax Studio on Discord">
+                    <i class="fa-brands fa-discord"></i>
+                </a>
+                <a href="https://github.com/kaymade" aria-label="Visit Syntax Studio on GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://x.com/syntaxstudio_?s=21" aria-label="Visit Syntax Studio on X">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+            </div>
+        </div>
+
+        <p class="footer-copyright">© 2026 Syntax Studio</p>
+    </footer>
+</body>
+</html>
