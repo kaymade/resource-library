@@ -73,21 +73,37 @@ function createResourceCard(resource) {
     return article;
 }
 
-function resourceMatchesSearch(resource, searchTerm) {
-    const resourceLevel = Array.isArray(resource.level)
-        ? resource.level.join(" ")
-        : resource.level;
+function getResourceLevelText(resource) {
+    if (Array.isArray(resource.level)) {
+        return resource.level.join(" ");
+    }
 
+    return resource.level;
+}
+
+function resourceMatchesSearch(resource, searchTerm) {
     const searchableText = `
         ${resource.title}
         ${resource.categories.join(" ")}
-        ${resourceLevel}
+        ${getResourceLevelText(resource)}
         ${resource.type}
         ${resource.description}
         ${resource.tags.join(" ")}
     `.toLowerCase();
 
     return searchableText.includes(searchTerm);
+}
+
+function resourceMatchesLevel(resource, selectedLevel) {
+    if (selectedLevel === "all") {
+        return true;
+    }
+
+    if (Array.isArray(resource.level)) {
+        return resource.level.includes(selectedLevel);
+    }
+
+    return resource.level === selectedLevel;
 }
 
 function filterResources() {
@@ -99,12 +115,7 @@ function filterResources() {
     const filteredResources = resourcesData.filter(function(resource) {
         const matchesSearch = resourceMatchesSearch(resource, searchTerm);
         const matchesCategory = selectedCategory === "all" || resource.categories.includes(selectedCategory);
-
-        const matchesLevel = selectedLevel === "all" ||
-            (Array.isArray(resource.level)
-                ? resource.level.includes(selectedLevel)
-                : resource.level === selectedLevel);
-
+        const matchesLevel = resourceMatchesLevel(resource, selectedLevel);
         const matchesType = selectedType === "all" || resource.type === selectedType;
 
         return matchesSearch && matchesCategory && matchesLevel && matchesType;
@@ -147,7 +158,35 @@ function clearFilters() {
     levelFilter.value = "all";
     typeFilter.value = "all";
 
+    const cleanUrl = window.location.pathname;
+    window.history.replaceState({}, "", cleanUrl);
+
     filterResources();
+}
+
+function applyFiltersFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const category = urlParams.get("category");
+    const level = urlParams.get("level");
+    const type = urlParams.get("type");
+    const search = urlParams.get("search");
+
+    if (category && categoryFilter.querySelector(`option[value="${category}"]`)) {
+        categoryFilter.value = category;
+    }
+
+    if (level && levelFilter.querySelector(`option[value="${level}"]`)) {
+        levelFilter.value = level;
+    }
+
+    if (type && typeFilter.querySelector(`option[value="${type}"]`)) {
+        typeFilter.value = type;
+    }
+
+    if (search) {
+        searchInput.value = search;
+    }
 }
 
 searchInput.addEventListener("input", filterResources);
@@ -156,4 +195,5 @@ levelFilter.addEventListener("change", filterResources);
 typeFilter.addEventListener("change", filterResources);
 clearFiltersButton.addEventListener("click", clearFilters);
 
-renderResources(resourcesData);
+applyFiltersFromUrl();
+filterResources();
