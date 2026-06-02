@@ -28,7 +28,7 @@ const resourcesData = [
     },
     {
         title: "The Odin Project",
-        categories: ["html-css", "javascript", "react", "git/github", "full-stack"],
+        categories: ["html-css", "javascript", "react", "git-github", "full-stack"],
         level: ["beginner", "intermediate"],
         type: "course",
         tags: ["projects", "curriculum", "full-stack", "portfolio", "self-taught", "free"],
