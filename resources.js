@@ -8,6 +8,14 @@ const resourceCount = document.getElementById("resource-count");
 const emptyState = document.getElementById("resource-empty-state");
 
 function formatLabel(text) {
+    if (Array.isArray(text)) {
+        return text
+            .map(function(item) {
+                return formatLabel(item);
+            })
+            .join(", ");
+    }
+
     return text
         .replaceAll("-", " ")
         .replace(/\b\w/g, function(letter) {
@@ -66,10 +74,14 @@ function createResourceCard(resource) {
 }
 
 function resourceMatchesSearch(resource, searchTerm) {
+    const resourceLevel = Array.isArray(resource.level)
+        ? resource.level.join(" ")
+        : resource.level;
+
     const searchableText = `
         ${resource.title}
         ${resource.categories.join(" ")}
-        ${resource.level}
+        ${resourceLevel}
         ${resource.type}
         ${resource.description}
         ${resource.tags.join(" ")}
@@ -88,9 +100,9 @@ function filterResources() {
         const matchesSearch = resourceMatchesSearch(resource, searchTerm);
         const matchesCategory = selectedCategory === "all" || resource.categories.includes(selectedCategory);
 
-        const matchesLevel = selectedLevel === "all" || 
-            (Array.isArray(resource.level) 
-                ? resource.level.includes(selectedLevel) 
+        const matchesLevel = selectedLevel === "all" ||
+            (Array.isArray(resource.level)
+                ? resource.level.includes(selectedLevel)
                 : resource.level === selectedLevel);
 
         const matchesType = selectedType === "all" || resource.type === selectedType;
@@ -100,6 +112,7 @@ function filterResources() {
 
     renderResources(filteredResources);
 }
+
 function renderResources(resources) {
     resourceGrid.innerHTML = "";
 
