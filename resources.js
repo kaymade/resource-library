@@ -87,7 +87,12 @@ function filterResources() {
     const filteredResources = resourcesData.filter(function(resource) {
         const matchesSearch = resourceMatchesSearch(resource, searchTerm);
         const matchesCategory = selectedCategory === "all" || resource.categories.includes(selectedCategory);
-        const matchesLevel = selectedLevel === "all" || resource.level === selectedLevel;
+
+        const matchesLevel = selectedLevel === "all" || 
+            (Array.isArray(resource.level) 
+                ? resource.level.includes(selectedLevel) 
+                : resource.level === selectedLevel);
+
         const matchesType = selectedType === "all" || resource.type === selectedType;
 
         return matchesSearch && matchesCategory && matchesLevel && matchesType;
@@ -95,7 +100,6 @@ function filterResources() {
 
     renderResources(filteredResources);
 }
-
 function renderResources(resources) {
     resourceGrid.innerHTML = "";
 
