@@ -101,10 +101,14 @@
                             <option value="python">Python</option>
                             <option value="react">React</option>
                             <option value="backend">Backend</option>
+                            <option value="full-stack">Full Stack</option>
                             <option value="databases">Databases</option>
                             <option value="git-github">Git & GitHub</option>
                             <option value="design-accessibility">Design & Accessibility</option>
-                            <option value="tools-workflow">Tools & Workflow</option>
+                            <option value="developer-tools">Developer Tools</option>
+                            <option value="design-resources">Design Resources</option>
+                            <option value="game">Game</option>
+                            <option value="projects">Projects</option>
                             <option value="career-portfolio">Career & Portfolio</option>
                             <option value="computer-science">Computer Science</option>
                         </select>
@@ -127,11 +131,16 @@
                             <option value="docs">Docs</option>
                             <option value="course">Course</option>
                             <option value="tutorial">Tutorial</option>
+                            <option value="guide">Guide</option>
                             <option value="video">Video</option>
                             <option value="tool">Tool</option>
                             <option value="article">Article</option>
                             <option value="reference">Reference</option>
                             <option value="interactive">Interactive</option>
+                            <option value="game">Game</option>
+                            <option value="challenge">Challenge</option>
+                            <option value="project">Project</option>
+                            <option value="asset-library">Asset Library</option>
                             <option value="cheatsheet">Cheatsheet</option>
                             <option value="book">Book</option>
                         </select>
@@ -151,6 +160,10 @@
         <section class="resource-results-section" aria-label="Resource results">
             <div class="resource-results-layout">
                 <aside class="resource-guide" aria-label="Resource guide">
+                    <div class="resource-guide-card">
+                        <h2>Start Here</h2>
+                        <p>Pick a topic, choose your level, and open one resource at a time. Docs are best for reference, while courses, tutorials, games, and projects are better for guided practice.</p>
+                    </div>
 
                     <div class="resource-guide-card">
                         <h2>Category Values</h2>
@@ -161,10 +174,14 @@
                             <span>python</span>
                             <span>react</span>
                             <span>backend</span>
+                            <span>full-stack</span>
                             <span>databases</span>
                             <span>git-github</span>
                             <span>design-accessibility</span>
-                            <span>tools-workflow</span>
+                            <span>developer-tools</span>
+                            <span>design-resources</span>
+                            <span>game</span>
+                            <span>projects</span>
                             <span>career-portfolio</span>
                             <span>computer-science</span>
                         </div>
@@ -184,6 +201,10 @@
 
                 <section class="resource-results-main">
                     <div class="resource-card-grid" id="resource-grid"></div>
+
+                    <button type="button" class="show-more-button" id="show-more-resources">
+                        Show More
+                    </button>
 
                     <div class="resource-empty-state" id="resource-empty-state">
                         <i class="fa-solid fa-folder-open"></i>

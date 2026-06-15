@@ -6,21 +6,27 @@ const typeFilter = document.getElementById("type-filter");
 const clearFiltersButton = document.getElementById("clear-filters");
 const resourceCount = document.getElementById("resource-count");
 const emptyState = document.getElementById("resource-empty-state");
+const showMoreButton = document.getElementById("show-more-resources");
+const initialVisibleResources = 12;
+const resourcesPerLoad = 6;
+
+let visibleResourceCount = initialVisibleResources;
+let currentFilteredResources = resourcesData;
 
 function formatLabel(text) {
-    if (Array.isArray(text)) {
-        return text
-            .map(function(item) {
-                return formatLabel(item);
-            })
-            .join(", ");
-    }
-
-    return text
+    return String(text)
         .replaceAll("-", " ")
         .replace(/\b\w/g, function(letter) {
             return letter.toUpperCase();
         });
+}
+
+function formatLabels(value) {
+    if (Array.isArray(value)) {
+        return value.map(formatLabel).join(", ");
+    }
+
+    return formatLabel(value);
 }
 
 function createResourceCard(resource) {
@@ -50,7 +56,7 @@ function createResourceCard(resource) {
                 ${categoriesHTML}
             </div>
 
-            <span class="resource-level">${formatLabel(resource.level)}</span>
+            <span class="resource-level">${formatLabels(resource.level)}</span>
         </div>
 
         <h3>${resource.title}</h3>
@@ -73,37 +79,17 @@ function createResourceCard(resource) {
     return article;
 }
 
-function getResourceLevelText(resource) {
-    if (Array.isArray(resource.level)) {
-        return resource.level.join(" ");
-    }
-
-    return resource.level;
-}
-
 function resourceMatchesSearch(resource, searchTerm) {
     const searchableText = `
         ${resource.title}
         ${resource.categories.join(" ")}
-        ${getResourceLevelText(resource)}
+        ${Array.isArray(resource.level) ? resource.level.join(" ") : resource.level}
         ${resource.type}
         ${resource.description}
         ${resource.tags.join(" ")}
     `.toLowerCase();
 
     return searchableText.includes(searchTerm);
-}
-
-function resourceMatchesLevel(resource, selectedLevel) {
-    if (selectedLevel === "all") {
-        return true;
-    }
-
-    if (Array.isArray(resource.level)) {
-        return resource.level.includes(selectedLevel);
-    }
-
-    return resource.level === selectedLevel;
 }
 
 function filterResources() {
@@ -115,32 +101,45 @@ function filterResources() {
     const filteredResources = resourcesData.filter(function(resource) {
         const matchesSearch = resourceMatchesSearch(resource, searchTerm);
         const matchesCategory = selectedCategory === "all" || resource.categories.includes(selectedCategory);
-        const matchesLevel = resourceMatchesLevel(resource, selectedLevel);
+        const matchesLevel = selectedLevel === "all" || getResourceLevels(resource).includes(selectedLevel);
         const matchesType = selectedType === "all" || resource.type === selectedType;
 
         return matchesSearch && matchesCategory && matchesLevel && matchesType;
     });
 
+    visibleResourceCount = initialVisibleResources;
     renderResources(filteredResources);
 }
 
 function renderResources(resources) {
     resourceGrid.innerHTML = "";
+    currentFilteredResources = resources;
 
-    resources.forEach(function(resource) {
+    resources.slice(0, visibleResourceCount).forEach(function(resource) {
         const card = createResourceCard(resource);
         resourceGrid.appendChild(card);
     });
 
-    updateResourceCount(resources.length);
+    updateResourceCount(resources.length, Math.min(visibleResourceCount, resources.length));
     updateEmptyState(resources.length);
+    updateShowMoreButton(resources.length);
 }
 
-function updateResourceCount(count) {
-    if (count === 1) {
+function getResourceLevels(resource) {
+    if (Array.isArray(resource.level)) {
+        return resource.level;
+    }
+
+    return [resource.level];
+}
+
+function updateResourceCount(totalCount, visibleCount) {
+    if (totalCount === 1) {
         resourceCount.textContent = "Showing 1 resource";
+    } else if (totalCount > visibleCount) {
+        resourceCount.textContent = `Showing ${visibleCount} of ${totalCount} resources`;
     } else {
-        resourceCount.textContent = `Showing ${count} resources`;
+        resourceCount.textContent = `Showing ${totalCount} resources`;
     }
 }
 
@@ -152,41 +151,26 @@ function updateEmptyState(count) {
     }
 }
 
+function updateShowMoreButton(totalCount) {
+    if (totalCount > visibleResourceCount) {
+        showMoreButton.classList.add("is-visible");
+    } else {
+        showMoreButton.classList.remove("is-visible");
+    }
+}
+
+function showMoreResources() {
+    visibleResourceCount += resourcesPerLoad;
+    renderResources(currentFilteredResources);
+}
+
 function clearFilters() {
     searchInput.value = "";
     categoryFilter.value = "all";
     levelFilter.value = "all";
     typeFilter.value = "all";
 
-    const cleanUrl = window.location.pathname;
-    window.history.replaceState({}, "", cleanUrl);
-
     filterResources();
-}
-
-function applyFiltersFromUrl() {
-    const urlParams = new URLSearchParams(window.location.search);
-
-    const category = urlParams.get("category");
-    const level = urlParams.get("level");
-    const type = urlParams.get("type");
-    const search = urlParams.get("search");
-
-    if (category && categoryFilter.querySelector(`option[value="${category}"]`)) {
-        categoryFilter.value = category;
-    }
-
-    if (level && levelFilter.querySelector(`option[value="${level}"]`)) {
-        levelFilter.value = level;
-    }
-
-    if (type && typeFilter.querySelector(`option[value="${type}"]`)) {
-        typeFilter.value = type;
-    }
-
-    if (search) {
-        searchInput.value = search;
-    }
 }
 
 searchInput.addEventListener("input", filterResources);
@@ -194,6 +178,6 @@ categoryFilter.addEventListener("change", filterResources);
 levelFilter.addEventListener("change", filterResources);
 typeFilter.addEventListener("change", filterResources);
 clearFiltersButton.addEventListener("click", clearFilters);
+showMoreButton.addEventListener("click", showMoreResources);
 
-applyFiltersFromUrl();
-filterResources();
+renderResources(resourcesData);

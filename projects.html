@@ -166,6 +166,7 @@
                             <option value="mini-app">Mini App</option>
                             <option value="api-project">API Project</option>
                             <option value="portfolio-project">Portfolio Project</option>
+                            <option value="practice-projects">Practice Projects</option>
                             <option value="game">Game</option>
                             <option value="community-challenge">Community Challenge</option>
                         </select>
@@ -235,6 +236,10 @@
                 <section class="project-results-main">
                     <div class="project-card-grid" id="project-grid"></div>
 
+                    <button type="button" class="show-more-projects-button" id="show-more-projects">
+                        Show More
+                    </button>
+
                     <div class="project-empty-state" id="project-empty-state">
                         <i class="fa-solid fa-folder-open"></i>
                         <h3>No project ideas found</h3>
@@ -259,6 +264,18 @@
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
         </section>
+
+        <div class="project-modal" id="project-modal" aria-hidden="true">
+            <div class="project-modal-backdrop" data-close-project-modal></div>
+
+            <section class="project-modal-panel" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+                <button type="button" class="project-modal-close" id="project-modal-close" aria-label="Close project details">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div class="project-modal-content" id="project-modal-content"></div>
+            </section>
+        </div>
     </main>
 
     <footer>
