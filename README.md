@@ -49,6 +49,7 @@ resource-library/
 ├── projects-data.js
 ├── community.html
 ├── submit.html
+├── privacy.html
 ├── styles.css
 └── images/
 ```
