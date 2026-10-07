@@ -51,3 +51,31 @@ resource-library/
 ├── submit.html
 ├── styles.css
 └── images/
+```
+
+## Resource Filtering
+
+The resource browser supports:
+
+- text search
+- category filtering
+- skill-level filtering
+- resource-type filtering
+- combined filter criteria
+- empty-result states
+- visible result counts
+- incremental result loading
+
+## Community Submissions
+
+Visitors can suggest resources or project ideas through the submission form.
+
+Submissions are reviewed before being added to the public resource data so the library remains curated rather than accepting unmoderated content directly into the site.
+
+## Responsive Design
+
+The interface includes dedicated responsive layouts for smaller desktop, tablet, and mobile viewports, including adaptive grids, navigation, cards, community sections, and page spacing.
+
+## About Syntax Studio
+
+Syntax Studio is a developer community centered around learning, building projects, sharing resources, and helping programmers grow alongside one another.
