@@ -14,43 +14,43 @@ let visibleResourceCount = initialVisibleResources;
 let currentFilteredResources = resourcesData;
 
 function formatLabel(text) {
-    return String(text)
-        .replaceAll("-", " ")
-        .replace(/\b\w/g, function(letter) {
-            return letter.toUpperCase();
-        });
+  return String(text)
+    .replaceAll("-", " ")
+    .replace(/\b\w/g, function (letter) {
+      return letter.toUpperCase();
+    });
 }
 
 function formatLabels(value) {
-    if (Array.isArray(value)) {
-        return value.map(formatLabel).join(", ");
-    }
+  if (Array.isArray(value)) {
+    return value.map(formatLabel).join(", ");
+  }
 
-    return formatLabel(value);
+  return formatLabel(value);
 }
 
 function createResourceCard(resource) {
-    const article = document.createElement("article");
-    article.classList.add("resource-card");
+  const article = document.createElement("article");
+  article.classList.add("resource-card");
 
-    const categoriesHTML = resource.categories
-        .map(function(category) {
-            return `<span class="resource-pill">${formatLabel(category)}</span>`;
-        })
-        .join("");
+  const categoriesHTML = resource.categories
+    .map(function (category) {
+      return `<span class="resource-pill">${formatLabel(category)}</span>`;
+    })
+    .join("");
 
-    const tagsHTML = resource.tags
-        .map(function(tag) {
-            return `
+  const tagsHTML = resource.tags
+    .map(function (tag) {
+      return `
                 <span>
                     <i class="fa-solid fa-tag"></i>
                     ${tag}
                 </span>
             `;
-        })
-        .join("");
+    })
+    .join("");
 
-    article.innerHTML = `
+  article.innerHTML = `
         <div class="resource-card-top">
             <div class="resource-category-pills">
                 ${categoriesHTML}
@@ -76,11 +76,11 @@ function createResourceCard(resource) {
         </a>
     `;
 
-    return article;
+  return article;
 }
 
 function resourceMatchesSearch(resource, searchTerm) {
-    const searchableText = `
+  const searchableText = `
         ${resource.title}
         ${resource.categories.join(" ")}
         ${Array.isArray(resource.level) ? resource.level.join(" ") : resource.level}
@@ -89,88 +89,96 @@ function resourceMatchesSearch(resource, searchTerm) {
         ${resource.tags.join(" ")}
     `.toLowerCase();
 
-    return searchableText.includes(searchTerm);
+  return searchableText.includes(searchTerm);
 }
 
 function filterResources() {
-    const searchTerm = searchInput.value.toLowerCase().trim();
-    const selectedCategory = categoryFilter.value;
-    const selectedLevel = levelFilter.value;
-    const selectedType = typeFilter.value;
+  const searchTerm = searchInput.value.toLowerCase().trim();
+  const selectedCategory = categoryFilter.value;
+  const selectedLevel = levelFilter.value;
+  const selectedType = typeFilter.value;
 
-    const filteredResources = resourcesData.filter(function(resource) {
-        const matchesSearch = resourceMatchesSearch(resource, searchTerm);
-        const matchesCategory = selectedCategory === "all" || resource.categories.includes(selectedCategory);
-        const matchesLevel = selectedLevel === "all" || getResourceLevels(resource).includes(selectedLevel);
-        const matchesType = selectedType === "all" || resource.type === selectedType;
+  const filteredResources = resourcesData.filter(function (resource) {
+    const matchesSearch = resourceMatchesSearch(resource, searchTerm);
+    const matchesCategory =
+      selectedCategory === "all" ||
+      resource.categories.includes(selectedCategory);
+    const matchesLevel =
+      selectedLevel === "all" ||
+      getResourceLevels(resource).includes(selectedLevel);
+    const matchesType =
+      selectedType === "all" || resource.type === selectedType;
 
-        return matchesSearch && matchesCategory && matchesLevel && matchesType;
-    });
+    return matchesSearch && matchesCategory && matchesLevel && matchesType;
+  });
 
-    visibleResourceCount = initialVisibleResources;
-    renderResources(filteredResources);
+  visibleResourceCount = initialVisibleResources;
+  renderResources(filteredResources);
 }
 
 function renderResources(resources) {
-    resourceGrid.innerHTML = "";
-    currentFilteredResources = resources;
+  resourceGrid.innerHTML = "";
+  currentFilteredResources = resources;
 
-    resources.slice(0, visibleResourceCount).forEach(function(resource) {
-        const card = createResourceCard(resource);
-        resourceGrid.appendChild(card);
-    });
+  resources.slice(0, visibleResourceCount).forEach(function (resource) {
+    const card = createResourceCard(resource);
+    resourceGrid.appendChild(card);
+  });
 
-    updateResourceCount(resources.length, Math.min(visibleResourceCount, resources.length));
-    updateEmptyState(resources.length);
-    updateShowMoreButton(resources.length);
+  updateResourceCount(
+    resources.length,
+    Math.min(visibleResourceCount, resources.length),
+  );
+  updateEmptyState(resources.length);
+  updateShowMoreButton(resources.length);
 }
 
 function getResourceLevels(resource) {
-    if (Array.isArray(resource.level)) {
-        return resource.level;
-    }
+  if (Array.isArray(resource.level)) {
+    return resource.level;
+  }
 
-    return [resource.level];
+  return [resource.level];
 }
 
 function updateResourceCount(totalCount, visibleCount) {
-    if (totalCount === 1) {
-        resourceCount.textContent = "Showing 1 resource";
-    } else if (totalCount > visibleCount) {
-        resourceCount.textContent = `Showing ${visibleCount} of ${totalCount} resources`;
-    } else {
-        resourceCount.textContent = `Showing ${totalCount} resources`;
-    }
+  if (totalCount === 1) {
+    resourceCount.textContent = "Showing 1 resource";
+  } else if (totalCount > visibleCount) {
+    resourceCount.textContent = `Showing ${visibleCount} of ${totalCount} resources`;
+  } else {
+    resourceCount.textContent = `Showing ${totalCount} resources`;
+  }
 }
 
 function updateEmptyState(count) {
-    if (count === 0) {
-        emptyState.classList.add("is-visible");
-    } else {
-        emptyState.classList.remove("is-visible");
-    }
+  if (count === 0) {
+    emptyState.classList.add("is-visible");
+  } else {
+    emptyState.classList.remove("is-visible");
+  }
 }
 
 function updateShowMoreButton(totalCount) {
-    if (totalCount > visibleResourceCount) {
-        showMoreButton.classList.add("is-visible");
-    } else {
-        showMoreButton.classList.remove("is-visible");
-    }
+  if (totalCount > visibleResourceCount) {
+    showMoreButton.classList.add("is-visible");
+  } else {
+    showMoreButton.classList.remove("is-visible");
+  }
 }
 
 function showMoreResources() {
-    visibleResourceCount += resourcesPerLoad;
-    renderResources(currentFilteredResources);
+  visibleResourceCount += resourcesPerLoad;
+  renderResources(currentFilteredResources);
 }
 
 function clearFilters() {
-    searchInput.value = "";
-    categoryFilter.value = "all";
-    levelFilter.value = "all";
-    typeFilter.value = "all";
+  searchInput.value = "";
+  categoryFilter.value = "all";
+  levelFilter.value = "all";
+  typeFilter.value = "all";
 
-    filterResources();
+  filterResources();
 }
 
 searchInput.addEventListener("input", filterResources);
